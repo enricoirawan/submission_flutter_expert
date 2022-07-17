@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/rlCRM7U5g2hcU1O8ylGcqsMYHIP.jpg",
+      "first_air_date": "2022-06-08",
+      "genre_ids": [
+        10765,
+        10759,
+        35
+      ],
+      "id": 92782,
+      "name": "Ms. Marvel",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Ms. Marvel",
+      "overview": "A great student, avid gamer, and voracious fan-fic scribe, Kamala Khan has a special affinity for superheroes, particularly Captain Marvel. However, she struggles to fit in at home and at school — that is, until she gets superpowers like the heroes shes always looked up to. Life is easier with superpowers, right?",
+      "popularity": 1659.327,
+      "poster_path": "/cdkyMYdu8ao26XOBvilNzLneUg1.jpg",
+      "vote_average": 7.5,
+      "vote_count": 258
+    }
+  ],
+  "total_pages": 41,
+  "total_results": 818
+}
