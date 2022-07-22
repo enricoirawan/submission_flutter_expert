@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movie/watchlist_movie_cubit.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -19,7 +21,10 @@ class MovieCard extends StatelessWidget {
             context,
             MovieDetailPage.ROUTE_NAME,
             arguments: movie.id,
-          );
+          ).then((_) {
+            BlocProvider.of<WatchlistMovieCubit>(context)
+                .getWatchlistMoviesFromDB();
+          });
         },
         child: Stack(
           alignment: Alignment.bottomLeft,

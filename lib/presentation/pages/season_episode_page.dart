@@ -1,11 +1,11 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/season_episode_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv_season/tv_season_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 
-class SeasonEpisode extends StatefulWidget {
+class SeasonEpisode extends StatelessWidget {
   static const ROUTE_NAME = '/season-episode';
 
   final int id;
@@ -17,37 +17,31 @@ class SeasonEpisode extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SeasonEpisode> createState() => _SeasonEpisodeState();
-}
-
-class _SeasonEpisodeState extends State<SeasonEpisode> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      Provider.of<SeasonEpisodeNotifier>(context, listen: false)
-          .fetchEpisodeFromTvSeriesSeason(widget.id, widget.seasonNumber);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    context.read<TvSeasonBloc>()
+      ..add(
+        GetSeasonEpisode(
+          id: id,
+          numberOfSeason: seasonNumber,
+        ),
+      );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Season ${widget.seasonNumber} Episodes"),
+        title: Text("Season $seasonNumber Episodes"),
       ),
-      body: Consumer<SeasonEpisodeNotifier>(
-        builder: (context, data, child) {
-          if (data.state == RequestState.Loading) {
+      body: BlocBuilder<TvSeasonBloc, TvSeasonState>(
+        builder: (context, state) {
+          if (state.requestState == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.state == RequestState.Loaded) {
+          } else if (state.requestState == RequestState.Loaded) {
             return Container(
               child: ListView.builder(
-                itemCount: data.episode.length,
+                itemCount: state.episodes.length,
                 itemBuilder: (context, index) {
-                  final episode = data.episode[index];
+                  final episode = state.episodes[index];
                   return Container(
                     padding: EdgeInsets.all(10),
                     child: Card(
@@ -101,7 +95,7 @@ class _SeasonEpisodeState extends State<SeasonEpisode> {
           } else {
             return Center(
               key: Key('error_message'),
-              child: Text(data.message),
+              child: Text(state.message),
             );
           }
         },

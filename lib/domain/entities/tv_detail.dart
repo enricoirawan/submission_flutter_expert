@@ -37,6 +37,26 @@ class TvDetail extends Equatable {
   final double voteAverage;
   final List<Season> seasons;
 
+  factory TvDetail.initial() {
+    return TvDetail(
+      adult: false,
+      backdropPath: "",
+      genres: [],
+      id: 0,
+      name: "",
+      numberOfEpisodes: 0,
+      numberOfSeasons: 0,
+      originalName: "",
+      overview: "",
+      popularity: 0.0,
+      posterPath: "",
+      status: "",
+      tagline: "",
+      voteAverage: 0.0,
+      seasons: [],
+    );
+  }
+
   @override
   List<Object?> get props => [
         adult,

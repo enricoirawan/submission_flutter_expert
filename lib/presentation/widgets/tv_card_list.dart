@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv/watchlist_tv_cubit.dart';
 import 'package:ditonton/presentation/pages/tv_series_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TvCard extends StatelessWidget {
   final Tv tv;
@@ -19,7 +21,10 @@ class TvCard extends StatelessWidget {
             context,
             TvSeriesDetailPage.ROUTE_NAME,
             arguments: tv.id,
-          );
+          ).then((_) {
+            BlocProvider.of<WatchlistTvCubit>(context)
+                .getWatchlistTvSeriesFromDB();
+          });
         },
         child: Stack(
           alignment: Alignment.bottomLeft,

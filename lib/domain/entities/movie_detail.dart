@@ -30,6 +30,23 @@ class MovieDetail extends Equatable {
   final double voteAverage;
   final int voteCount;
 
+  factory MovieDetail.initial() {
+    return MovieDetail(
+      adult: false,
+      backdropPath: '',
+      genres: [],
+      id: 0,
+      originalTitle: "",
+      overview: "",
+      posterPath: "",
+      releaseDate: "",
+      runtime: 0,
+      title: "",
+      voteAverage: 0.0,
+      voteCount: 0,
+    );
+  }
+
   @override
   List<Object?> get props => [
         adult,
